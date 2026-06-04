@@ -1111,7 +1111,8 @@ The official, recommended way to write Redux. Reduces boilerplate with `createSl
 
 #### Q96. What is the `useSelector` / `useDispatch` pattern in Redux?
 
-`useSelector(state => state.slice.value)` subscribes a component to a slice of Redux state and re-renders only when that value changes. `useDispatch()` returns the dispatch function to send actions.
+useSelector is for reading data. It lets your component "grab" a specific piece of state from the global Redux store
+useDispatch is for changing data. It gives you a dispatch function. You use this function to send "actions" (requests) to the Redux store telling it to update the data.
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -1149,15 +1150,15 @@ Functions that take a component and return a new component with enhanced behavio
 
 #### Q100. What is the render props pattern?
 
-A component accepts a function prop (`render` or `children`) and calls it with shared data. `<Mouse render={({x,y}) => <Cursor x={x} y={y}/>}/>`. Flexible but can lead to callback hell; custom hooks are usually cleaner.
+The Render Props pattern is a way to share a specific behavior or piece of data between components by using a function as a prop.
 
-[⬆ Back to Table of Contents](#-table-of-contents)
+[⬆ Back to Table of Contents](#-table-of-contents) 
 
 ---
 
 #### Q101. What are compound components?
 
-A set of components that share implicit state through context. E.g., `<Select>`, `<Select.Option>`, `<Select.Trigger>`. The parent manages state; children are compositionally flexible. Used in UI libraries (Headless UI, Radix).
+Compound Components are a group of components that work together as a team to handle one big job, sharing a hidden brain behind the scenes. E.g., `<Select>`, `<Select.Option>`, `<Select.Trigger>`. The parent manages state; children are compositionally flexible. Used in UI libraries (Headless UI, Radix).
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
@@ -1173,14 +1174,18 @@ A component that wraps part of the tree and supplies shared state/functionality 
 
 #### Q103. What is the state reducer pattern?
 
-A component exposes a `stateReducer` prop. Consumers can override state transitions for customization, giving them control without losing default behavior. Used in libraries like Downshift.
+State Reducer Pattern gives the user of your component a "veto power" or steering wheel over how the component’s internal data changes.
+
+Instead of the component making all the rules about how its state updates, it handles the heavy lifting but passes every change through a custom function you provide. This lets you intercept and modify the changes before they actually happen.
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
 ---
 
 #### Q104. What is the controlled component pattern for reusable components?
+This pattern creates a flexible component that can run on "autopilot" OR be manually "steered" by its parent.
 
+Instead of forcing a component to be strictly controlled or strictly uncontrolled, you build it to support both modes seamlessly.
 A reusable component can work in two modes: uncontrolled (manages own state) or controlled (parent provides `value` + `onChange`). Example: an `<Accordion>` that works out of the box but can also be fully controlled.
 
 [⬆ Back to Table of Contents](#-table-of-contents)
@@ -1237,7 +1242,16 @@ Use a portal to render outside the app root. Manage open state via controlled pa
 
 #### Q111. What is prop inversion of control?
 
-Giving the consumer control over behavior by accepting render functions, state reducers, or slot components instead of hardcoding behavior. Makes components flexible without bloating their props API.
+Prop Inversion of Control (IoC) means a component stops bossing its pieces around and instead says to the developer using it: "You take the wheel, you decide how this part should work."
+
+Instead of hardcoding every single behavior inside the component and adding 50 different configuration props, the component hands control back over to you.
+
+`const names = ["Alice", "Bob", "Charlie"];
+
+<List 
+  items={names} 
+  renderItem={(name) => <span>👤 {name}</span>} 
+/>`
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
