@@ -1246,12 +1246,12 @@ Prop Inversion of Control (IoC) means a component stops bossing its pieces aroun
 
 Instead of hardcoding every single behavior inside the component and adding 50 different configuration props, the component hands control back over to you.
 
-`const names = ["Alice", "Bob", "Charlie"];
+const names = ["Alice", "Bob", "Charlie"];
 
 <List 
   items={names} 
   renderItem={(name) => <span>👤 {name}</span>} 
-/>`
+/>
 
 [⬆ Back to Table of Contents](#-table-of-contents)
 
